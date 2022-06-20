@@ -1,0 +1,16 @@
+{
+  "name": "tradinglite-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "ws": "^8.8.0"
+  },
+  "keywords": [],
+  "author": "xliee",
+  "license": "ISC"
+}
