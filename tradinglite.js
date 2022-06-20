@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+
 function W(e, t, r) {
   return r ? 4294967296 * t + (e >>> 0) : 4294967296 * (t >>> 0) + (e >>> 0);
 }
@@ -1694,6 +1696,19 @@ function parse(buff){
 
 
 
+function generate_tab_id(){
+  a = ""
+  e = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+  for(; ; ){
+    let t = crypto.webcrypto.getRandomValues(new Uint8Array(18))
+    let s = 18
+    for(; s--; ){
+      if (a += e[t[s] & 63] || "", a.length === 10)
+        return a
+      // a += String.fromCharCode(t[s] % o)
+    }
+  }
+}
 
 
-module.exports = { parse };
+module.exports = { parse, generate_tab_id };

@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 var WebSocket = require("ws");
 const fetch = require("node-fetch");
-const { parse } = require('./tradinglite.js');
+const { parse, generate_tab_id } = require('./tradinglite.js');
 
 // CHANGE THIS TO YOUR OWN CREDENTIALS
 const token = 'acc_0TFmHg1UdssK0ZJJ4AbsKbUV1Ej'
-const tab_id = 'tab_PHUfBeaPeR'
 const wsId = 'eWGDsHnx' // Workspace Id (can be found in the url of your workspace)
 const version = "v0.41.13"
+const tab_id = `tab_${generate_tab_id()}`
 
 
 async function onConnect(connection) {
   console.log("WebSocket Client Connected");
     
   // EXAMPLE SUBSCRIPTION
+  // ws.send(JSON.stringify({"action":"markets"}))
   ws.send(JSON.stringify({"action":"subscribe","exchange":"coinbase","symbols":["ETH-USD"],"channels":["volume,15"]}));
   ws.send(JSON.stringify({"action":"subscribe","exchange":"coinbase","symbols":["ETH-USD"],"channels":["trades"]}));
   ws.send(JSON.stringify({"action":"subscribe","exchange":"coinbase","symbols":["ETH-USD"],"channels":["orderbook"]}));
@@ -24,7 +25,7 @@ async function onConnect(connection) {
   // CUSTOM ACTION REQUESTS
   ws.send(JSON.stringify({"action":"range","kind":"heatmap@1","exchange":"coinbase","symbol":"ETH-USD","timeframe":15,"from":1655222400,"to":1655451900,"meta_id":8}));
 
-
+  
 }
 
 // Your logic here
@@ -47,10 +48,10 @@ async function parsemsg(message, isBinary) {
         console.log(id)
         break;
       case 'trades':
-        console.log(id)
+        console.log(data)
         break;
       case 'orderbook':
-        console.log(id)
+        console.log(data)
         break;
       case 'volume':
         console.log(id)

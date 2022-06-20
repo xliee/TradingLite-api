@@ -6,7 +6,6 @@ It translates the binary data found in the webshocket communication to a readabl
 ##### Change those values with yours
 ```javascript
 const token = 'acc_0TFmHg1UdssK0ZJJ4AbsKbUV1Ej'
-const tab_id = 'tab_PHUfBeaPeR'
 const wsId = 'eWGDsHnx' // Workspace Id (can be found in the url of your workspace)
 const version = "v0.41.13"
 ```
